@@ -1,0 +1,8 @@
+This is a placeholder file to verify the public directory is working correctly.
+
+To fix the background image:
+1. Save the gorilla image you provided as "gorilla-backdrop.jpg" (or .png)
+2. Place it directly in the "public" folder (not in an images subfolder)
+3. The image path should be: C:\Users\pcwor\Downloads\x1\justagorilla\public\gorilla-backdrop.jpg
+
+Alternatively, you can update the path in the Hero component if you prefer a different location. 

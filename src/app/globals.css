@@ -1,26 +1,107 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Base Colors */
+    --background: 210 26% 12%; /* custom-deep-dark #162328 */
+    --foreground: 0 0% 98%;
+    --card: 234 23% 19%; /* custom-dark-blue #23253C */
+    --card-foreground: 0 0% 98%;
+    --popover: 210 26% 12%; 
+    --popover-foreground: 0 0% 98%;
+    --primary: 234 23% 19%; /* custom-dark-blue */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 226 7% 44%; /* custom-gray #676A7A */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 195 5% 73%; /* New subtle color #B5BFBF */
+    --muted-foreground: 195 5% 73%; /* #B5BFBF */
+    --accent: 234 33% 25%; /* Darker shade of custom-dark-blue instead of yellow */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 195 5% 73%; /* #B5BFBF */
+    --input: 195 5% 73%; /* #B5BFBF */
+    --ring: 234 33% 25%; /* Matching new accent color */
+
+    /* Border Radius - based on provided image */
+    --radius-sm: 0.25rem; /* 4px */
+    --radius-md: 0.5rem;  /* 8px */
+    --radius-lg: 0.75rem; /* 12px */
+    --radius: var(--radius-md);
+
+    /* Shadows - based on provided image */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.08), 0 2px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.08), 0 2px 12px rgba(0, 0, 0, 0.06), 0 8px 14px rgba(0, 0, 0, 0.04), 0 12px 16px rgba(0, 0, 0, 0.02);
+
+    /* Spacing Units - based on provided image */
+    --space-unit: 0.5rem; /* 8px */
+    --space-1: calc(1 * var(--space-unit));   /* 8px */
+    --space-2: calc(2 * var(--space-unit));   /* 16px */
+    --space-4: calc(4 * var(--space-unit));   /* 32px */
+    --space-8: calc(8 * var(--space-unit));   /* 64px */
+    
+    /* Typography scale - based on provided image */
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-2xl: 1.5rem;    /* 24px */
+    --font-size-3xl: 1.875rem;  /* 30px */
+    --font-size-4xl: 2.25rem;   /* 36px */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+  h1 {
+    font-size: var(--font-size-4xl);
+    line-height: 1.1;
+  }
+  h2 {
+    font-size: var(--font-size-3xl);
+    line-height: 1.2;
+  }
+  h3 {
+    font-size: var(--font-size-2xl);
+    line-height: 1.3;
+  }
+  h4 {
+    font-size: var(--font-size-xl);
+    line-height: 1.4;
+  }
+  p {
+    line-height: 1.6;
+  }
+}
+
+/* Custom component classes */
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 md:px-6;
+  }
+  
+  .section-padding {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+  
+  .card-shadow {
+    box-shadow: var(--shadow-md);
+  }
+  
+  .text-dimmed {
+    opacity: 0.5;
+  }
 }
