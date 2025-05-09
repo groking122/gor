@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -23,37 +24,46 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full border-t border-border/40 bg-primary/80 backdrop-blur supports-[backdrop-filter]:bg-primary/60">
+    <footer className="w-full border-t border-border/40 bg-gradient-to-r from-primary/90 to-primary backdrop-blur supports-[backdrop-filter]:bg-primary/60">
       <div className="container-custom py-6 md:py-8">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">JUSTAGORILLA</h3>
-            <p className="text-sm text-custom-subtle">
-              The ultimate showdown that divides the internet.
-            </p>
+        <div className="flex flex-col md:flex-row items-start justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <div className="h-12 w-12 overflow-hidden rounded-md relative ring-2 ring-white/10 shadow-lg">
+              <img 
+                src="/213123122131.png" 
+                alt="Gorilla Logo" 
+                className="w-full h-full object-contain rounded-md"
+              />
+            </div>
+            <div className="flex flex-col">
+              <Badge variant="glass" className="uppercase tracking-wider mb-2 self-start">Official</Badge>
+              <p className="text-sm bg-gradient-to-r from-[#00FFFF] to-white bg-clip-text text-transparent font-semibold">
+                The ultimate showdown that divides the internet.
+              </p>
+            </div>
           </div>
           
-          <div className="md:text-right space-y-2">
-            <h3 className="text-lg font-medium">Contract (Coming Soon)</h3>
-            <div className="flex md:flex-row-reverse md:justify-start items-center gap-2">
+          <div className="flex items-center gap-4">
+            <div className="font-medium font-mono text-sm">Contract <span className="text-xs opacity-70">(Coming Soon)</span></div>
+            <div className="flex items-center gap-2">
+              <code className="text-xs bg-black/50 p-2 rounded-md text-custom-subtle truncate font-mono border border-white/10 max-w-48">
+                {contractAddress}
+              </code>
               <Button
                 onClick={handleCopy}
-                variant="outline"
+                variant="neon"
                 size="sm"
-                className="whitespace-nowrap"
+                className="whitespace-nowrap h-8"
               >
                 Copy
               </Button>
-              <code className="text-xs bg-primary/50 p-2 rounded text-custom-subtle flex-1 truncate">
-                {contractAddress}
-              </code>
             </div>
           </div>
         </div>
         
-        <Separator className="my-4" />
+        <Separator className="my-6 opacity-20" />
         
-        <div className="flex flex-col md:flex-row justify-between items-center gap-2">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-custom-subtle text-center md:text-left">
             &copy; {year} JustAGorilla. All memes reserved.
           </p>

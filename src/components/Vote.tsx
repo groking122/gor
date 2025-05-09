@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,8 +8,49 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 
 const Vote = () => {
-  // Basic state for voting - will be implemented in a future version
-  const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
+  // State for voting functionality
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [hasVoted, setHasVoted] = useState<boolean>(false);
+  const [menVotes, setMenVotes] = useState<number>(427);
+  const [gorillaVotes, setGorillaVotes] = useState<number>(589);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [voteMessage, setVoteMessage] = useState<string>("");
+
+  // Calculate percentages for progress bars
+  const totalVotes = menVotes + gorillaVotes;
+  const menPercentage = Math.round((menVotes / totalVotes) * 100);
+  const gorillaPercentage = Math.round((gorillaVotes / totalVotes) * 100);
+
+  // Check if user has already voted using localStorage
+  useEffect(() => {
+    const storedVote = localStorage.getItem('gorillaVote');
+    if (storedVote) {
+      setSelectedOption(storedVote);
+      setHasVoted(true);
+    }
+  }, []);
+
+  // Function to handle vote submission
+  const handleVote = () => {
+    if (!selectedOption || hasVoted) return;
+    
+    setIsLoading(true);
+    
+    // Simulate API call with timeout
+    setTimeout(() => {
+      if (selectedOption === 'men') {
+        setMenVotes(prevVotes => prevVotes + 1);
+      } else {
+        setGorillaVotes(prevVotes => prevVotes + 1);
+      }
+      
+      // Save vote to localStorage
+      localStorage.setItem('gorillaVote', selectedOption);
+      setHasVoted(true);
+      setIsLoading(false);
+      setVoteMessage(`Thanks for voting for ${selectedOption === 'men' ? '100 Men' : '1 Gorilla'}!`);
+    }, 1000);
+  };
 
   return (
     <section id="vote" className="section-padding w-full relative overflow-hidden">
@@ -35,6 +76,29 @@ const Vote = () => {
             The age-old question that divides the internet. Cast your vote and join the epic debate.
           </p>
           <Separator className="my-4" />
+          
+          {/* Vote Counts */}
+          {hasVoted && (
+            <div className="w-full max-w-md mt-4">
+              <div className="flex justify-between text-sm text-custom-subtle mb-2">
+                <span>100 Men: {menVotes} votes ({menPercentage}%)</span>
+                <span>1 Gorilla: {gorillaVotes} votes ({gorillaPercentage}%)</span>
+              </div>
+              <div className="h-2 w-full bg-card rounded-full overflow-hidden flex">
+                <div 
+                  className="h-full bg-blue-400" 
+                  style={{ width: `${menPercentage}%` }} 
+                />
+                <div 
+                  className="h-full bg-accent" 
+                  style={{ width: `${gorillaPercentage}%` }} 
+                />
+              </div>
+              <p className="text-xs text-custom-subtle mt-2">
+                Total votes: {totalVotes} • Live results
+              </p>
+            </div>
+          )}
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -69,9 +133,10 @@ const Vote = () => {
               <Button 
                 className="w-full" 
                 variant="outline"
-                onClick={() => setSelectedOption('men')}
+                onClick={() => !hasVoted && setSelectedOption('men')}
+                disabled={hasVoted || isLoading}
               >
-                Vote for Men
+                {hasVoted && selectedOption === 'men' ? '✓ Voted' : 'Vote for Men'}
               </Button>
             </CardFooter>
           </Card>
@@ -105,23 +170,46 @@ const Vote = () => {
             </CardContent>
             <CardFooter>
               <Button 
-                className="w-full bg-accent text-accent-foreground hover:bg-accent/90" 
-                onClick={() => setSelectedOption('gorilla')}
+                className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
+                onClick={() => !hasVoted && setSelectedOption('gorilla')}
+                disabled={hasVoted || isLoading}
               >
-                Vote for Gorilla
+                {hasVoted && selectedOption === 'gorilla' ? '✓ Voted' : 'Vote for Gorilla'}
               </Button>
             </CardFooter>
           </Card>
         </div>
         
-        {selectedOption && (
+        {selectedOption && !hasVoted && (
           <div className="mt-8 text-center">
-            <p className="text-sm text-custom-subtle">
-              You voted for: <span className="font-semibold">{selectedOption === 'men' ? '100 Men' : '1 Gorilla'}</span>
+            <p className="text-custom-subtle mb-4">
+              You selected: <span className="font-semibold">{selectedOption === 'men' ? '100 Men' : '1 Gorilla'}</span>
             </p>
-            <p className="text-xs text-custom-subtle mt-2">
-              Full voting system with live results coming soon!
-            </p>
+            <Button 
+              onClick={handleVote} 
+              className="bg-custom-dark-blue hover:bg-custom-dark-blue/90"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Submitting...' : 'Confirm Vote'}
+            </Button>
+          </div>
+        )}
+        
+        {hasVoted && (
+          <div className="mt-8 text-center">
+            <p className="text-custom-subtle">{voteMessage || `You voted for: ${selectedOption === 'men' ? '100 Men' : '1 Gorilla'}`}</p>
+            <Button 
+              variant="link" 
+              className="text-custom-subtle mt-1 text-xs"
+              onClick={() => {
+                localStorage.removeItem('gorillaVote');
+                setSelectedOption(null);
+                setHasVoted(false);
+                setVoteMessage("");
+              }}
+            >
+              Reset Vote (Dev Only)
+            </Button>
           </div>
         )}
       </div>

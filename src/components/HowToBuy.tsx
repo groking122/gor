@@ -29,7 +29,7 @@ const HowToBuy = () => {
           <Badge variant="outline" className="mb-4">GET INVOLVED</Badge>
           <h2 className="text-3xl font-bold mb-4 text-white shadow-sm">Get Your $GORILLA Token</h2>
           <p className="text-lg text-white max-w-lg font-medium">
-            $GORILLA is listed on centralized exchanges and available on Cardano DEXs.
+            $GORILLA is available on Cardano DEXs.
           </p>
           <Separator className="my-6 max-w-md mx-auto" />
         </div>

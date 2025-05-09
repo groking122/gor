@@ -72,9 +72,9 @@ const Hero = () => {
       <div className="container-custom flex flex-col items-center z-10">
         <Badge variant="secondary" className="mb-6">The Epic Debate</Badge>
         <h1 className="max-w-4xl font-extrabold tracking-tight text-balance mb-4 text-white">
-          100 Men <span className="text-custom-gray">vs</span> 1 Gorilla
+          100 Men <span className="text-white">vs</span> 1 Gorilla
         </h1>
-        <p className="max-w-2xl text-lg text-custom-subtle mb-10">
+        <p className="max-w-2xl text-lg mb-10 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent font-semibold">
           The ultimate showdown that divides the internet. Choose your fighter, back your side, join the movement.
         </p>
         
@@ -89,13 +89,13 @@ const Hero = () => {
         
         {/* Hero Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mb-16">
-          <Button size="lg" className="bg-custom-dark-blue hover:bg-custom-dark-blue/90">
-            Cast Your Vote
+          <Button size="lg" className="bg-custom-dark-blue hover:bg-custom-dark-blue/90" asChild>
+            <a href="#vote">Cast Your Vote</a>
           </Button>
           <HoverCard>
             <HoverCardTrigger asChild>
-              <Button size="lg" variant="outline" className="border-custom-gray/50 text-white">
-                Get $GORILLA Token
+              <Button size="lg" variant="outline" className="border-custom-gray/50 text-white" asChild>
+                <a href="#how-to-buy">Get $GORILLA Token</a>
               </Button>
             </HoverCardTrigger>
             <HoverCardContent className="w-80">
