@@ -87,23 +87,30 @@ const Socials = () => {
             </CardContent>
           </Card>
 
-          {/* Cardanoscan Card */}
+          {/* Solscan Card */}
           <Card className="overflow-hidden group hover:border-accent/50 transition-all sm:col-span-2 md:col-span-1 bg-card/85 backdrop-blur-md border-blue-400/20">
             <CardContent className="p-6 flex flex-col items-center">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center bg-blue-500/10 mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center bg-purple-500/10 mb-4 group-hover:scale-110 transition-transform">
                 <svg 
-                  className="w-6 h-6 text-[#0033AD]" 
+                  className="w-6 h-6 text-[#9945FF]" 
                   xmlns="http://www.w3.org/2000/svg" 
                   viewBox="0 0 24 24" 
-                  fill="currentColor"
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
                 >
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                  <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2m16 0V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v11"/>
+                  <path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/>
                 </svg>
               </div>
-              <h3 className="font-semibold mb-1">Cardanoscan</h3>
+              <h3 className="font-semibold mb-1">Solscan</h3>
               <p className="text-sm text-custom-subtle mb-4">Verify token & transactions</p>
-              <Button variant="outline" size="sm" className="w-full">
-                View Token
+              <Button variant="outline" size="sm" className="w-full" asChild>
+                <a href="https://solscan.io" target="_blank" rel="noopener noreferrer">
+                  View Token
+                </a>
               </Button>
             </CardContent>
           </Card>

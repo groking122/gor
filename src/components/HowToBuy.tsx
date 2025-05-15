@@ -29,82 +29,101 @@ const HowToBuy = () => {
           <Badge variant="outline" className="mb-4">GET INVOLVED</Badge>
           <h2 className="text-3xl font-bold mb-4 text-white shadow-sm">Get Your $GORILLA Token</h2>
           <p className="text-lg text-white max-w-lg font-medium">
-            $GORILLA is available on Cardano DEXs.
+            $GORILLA is available on Solana DEXs.
           </p>
           <Separator className="my-6 max-w-md mx-auto" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {/* Step 1: Get a Cardano Wallet */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          {/* Step 1: Download Phantom */}
           <Card className="card-shadow bg-card/85 backdrop-blur-md border-accent/20">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">Get a Cardano Wallet</CardTitle>
+                <CardTitle className="text-lg">Download Phantom</CardTitle>
                 <div className="h-8 w-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">1</div>
               </div>
-              <CardDescription className="text-custom-subtle">First step to join the battle</CardDescription>
+              <CardDescription className="text-custom-subtle">Get your wallet ready</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm mb-4 text-custom-subtle">
-                A Cardano wallet enables you to receive, send, and manage your cryptocurrencies on the Cardano blockchain. 
-                We recommend using VESPR, a popular and easy-to-use wallet that works on both mobile and desktop.
+                Download Phantom or your wallet of choice from the store. Desktop users, download the Google Chrome extension by going to phantom.app.
               </p>
             </CardContent>
             <CardFooter>
               <Button variant="outline" size="sm" className="w-full" asChild>
-                <a href="https://vespr.xyz/download" target="_blank" rel="noopener noreferrer">
-                  Download VESPR
+                <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer">
+                  Download Phantom
                 </a>
               </Button>
             </CardFooter>
           </Card>
 
-          {/* Step 2: Get ADA */}
+          {/* Step 2: Get SOL */}
           <Card className="card-shadow bg-card/85 backdrop-blur-md border-accent/20">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">Get ADA</CardTitle>
+                <CardTitle className="text-lg">Get some SOL</CardTitle>
                 <div className="h-8 w-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">2</div>
               </div>
-              <CardDescription className="text-custom-subtle">Cardano&apos;s native currency</CardDescription>
+              <CardDescription className="text-custom-subtle">Solana's native currency</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm mb-4 text-custom-subtle">
-                ADA is Cardano&apos;s native cryptocurrency and is used to trade for $GORILLA. 
-                You can buy ADA directly from VESPR wallet or get it through a centralized exchange 
-                like Binance and then transfer to your wallet.
+                You can buy SOL directly on Phantom, transfer from another wallet, or buy on another exchange and send it to your wallet.
               </p>
             </CardContent>
             <CardFooter>
               <Button variant="outline" size="sm" className="w-full" asChild>
-                <a href="https://vespr.xyz/buy" target="_blank" rel="noopener noreferrer">
-                  Buy ADA on VESPR
+                <a href="https://phantom.app/buy" target="_blank" rel="noopener noreferrer">
+                  Buy SOL
                 </a>
               </Button>
             </CardFooter>
           </Card>
 
-          {/* Step 3: Swap ADA for $GORILLA */}
+          {/* Step 3: Go to Raydium */}
           <Card className="card-shadow bg-card/85 backdrop-blur-md border-accent/20">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">Swap for $GORILLA</CardTitle>
+                <CardTitle className="text-lg">Go to Raydium</CardTitle>
                 <div className="h-8 w-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">3</div>
               </div>
-              <CardDescription className="text-custom-subtle">Make the final exchange</CardDescription>
+              <CardDescription className="text-custom-subtle">Use a Solana DEX</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm mb-4 text-custom-subtle">
-                We recommend using DexHunter, as it finds the best price route for your swap by 
-                aggregating all the major liquidity sources on Cardano. Simply connect your VESPR 
-                wallet and swap ADA for $GORILLA.
+                Now that you have some SOL, head to Raydium.io to swap your SOL for $GORILLA. Raydium is one of the top decentralized exchanges on Solana.
               </p>
             </CardContent>
             <CardFooter>
               <Button variant="outline" size="sm" className="w-full" asChild>
-                <a href="https://app.dexhunter.io/" target="_blank" rel="noopener noreferrer">
-                  Buy on DexHunter
+                <a href="https://raydium.io/swap" target="_blank" rel="noopener noreferrer">
+                  Open Raydium
                 </a>
+              </Button>
+            </CardFooter>
+          </Card>
+
+          {/* Step 4: Buy $GORILLA */}
+          <Card className="card-shadow bg-card/85 backdrop-blur-md border-accent/20">
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg">Buy $GORILLA</CardTitle>
+                <div className="h-8 w-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">4</div>
+              </div>
+              <CardDescription className="text-custom-subtle">Make the swap</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm mb-4 text-custom-subtle">
+                Paste the $GORILLA token address (CA) into Raydium and swap your SOL for $GORILLA. There are zero taxes so you don't need to worry about slippage.
+              </p>
+            </CardContent>
+            <CardFooter>
+              <Button variant="outline" size="sm" className="w-full" onClick={() => {
+                navigator.clipboard.writeText("TOKEN_ADDRESS_HERE");
+                alert("$GORILLA token address copied to clipboard!");
+              }}>
+                Copy Token Address
               </Button>
             </CardFooter>
           </Card>

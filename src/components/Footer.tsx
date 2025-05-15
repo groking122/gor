@@ -7,17 +7,6 @@ import { Badge } from "@/components/ui/badge";
 
 const Footer = () => {
   const year = new Date().getFullYear();
-  const contractAddress = "57d0a5165933347cd158c16832e4ec0ee9805d0d2fcc0d8f00cfc01f";
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(contractAddress);
-      alert('Policy ID copied to clipboard!');
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-      alert('Failed to copy policy ID.');
-    }
-  };
 
   return (
     <footer className="w-full border-t border-border/40 bg-gradient-to-r from-primary/90 to-primary backdrop-blur supports-[backdrop-filter]:bg-primary/60">
@@ -36,23 +25,6 @@ const Footer = () => {
               <p className="text-sm bg-gradient-to-r from-[#00FFFF] to-white bg-clip-text text-transparent font-semibold">
                 The ultimate showdown that divides the internet.
               </p>
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-4">
-            <div className="font-medium font-mono text-sm">$GORILLA Policy ID</div>
-            <div className="flex items-center gap-2">
-              <code className="text-xs bg-black/50 p-2 rounded-md text-custom-subtle truncate font-mono border border-white/10 max-w-48">
-                {contractAddress}
-              </code>
-              <Button
-                onClick={handleCopy}
-                variant="neon"
-                size="sm"
-                className="whitespace-nowrap h-8"
-              >
-                Copy
-              </Button>
             </div>
           </div>
         </div>
