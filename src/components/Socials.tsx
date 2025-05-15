@@ -53,9 +53,9 @@ const Socials = () => {
                 </svg>
               </div>
               <h3 className="font-semibold mb-1">Twitter (X)</h3>
-              <p className="text-sm text-custom-subtle mb-4">@Just1Gorilla</p>
+              <p className="text-sm text-custom-subtle mb-4">@1GorillaSOL</p>
               <Button variant="outline" size="sm" className="w-full" asChild>
-                <a href="https://x.com/Just1Gorilla" target="_blank" rel="noopener noreferrer">
+                <a href="https://x.com/1GorillaSOL" target="_blank" rel="noopener noreferrer">
                   Follow Us
                 </a>
               </Button>

@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Save, Send, Plus } from "lucide-react";
 
 // Form validation types
 type FormData = {
@@ -185,16 +186,20 @@ const ApplicationForm = ({
       <CardFooter className="flex flex-col sm:flex-row sm:justify-between space-y-3 sm:space-y-0">
         <Button 
           type="button" 
-          variant="outline" 
+          variant="brutalism" 
           onClick={handleSaveDraft}
+          className="hover:bg-gray-50"
         >
+          <Save className="mr-1" />
           Save Draft
         </Button>
         <Button 
           type="submit" 
-          className="bg-custom-dark-blue hover:bg-custom-dark-blue/90"
+          variant="gradient"
+          className="hover:shadow-xl"
           disabled={isSubmitting}
         >
+          <Send className="mr-1" />
           {isSubmitting ? 'Submitting...' : 'Submit Application'}
         </Button>
       </CardFooter>
@@ -379,7 +384,8 @@ const Biography = () => {
               </CardContent>
               <CardFooter className="flex justify-center">
                 <Button 
-                  className="bg-custom-dark-blue hover:bg-custom-dark-blue/90" 
+                  className="hover:shadow-xl" 
+                  variant="neon"
                   onClick={() => {
                     localStorage.removeItem('gorillaApplication');
                     setIsSubmitted(false);
@@ -393,6 +399,7 @@ const Biography = () => {
                     });
                   }}
                 >
+                  <Plus className="mr-1" />
                   Submit Another Application
                 </Button>
               </CardFooter>

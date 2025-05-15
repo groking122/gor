@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
+import { Download, Wallet, ExternalLink, Copy } from "lucide-react";
 
 const HowToBuy = () => {
   return (
@@ -50,8 +51,9 @@ const HowToBuy = () => {
               </p>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" size="sm" className="w-full" asChild>
+              <Button variant="gradient" size="sm" className="w-full" asChild>
                 <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer">
+                  <Download className="mr-1" />
                   Download Phantom
                 </a>
               </Button>
@@ -73,8 +75,9 @@ const HowToBuy = () => {
               </p>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" size="sm" className="w-full" asChild>
+              <Button variant="neon" size="sm" className="w-full" asChild>
                 <a href="https://phantom.app/buy" target="_blank" rel="noopener noreferrer">
+                  <Wallet className="mr-1" />
                   Buy SOL
                 </a>
               </Button>
@@ -96,8 +99,9 @@ const HowToBuy = () => {
               </p>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" size="sm" className="w-full" asChild>
+              <Button variant="gradient" size="sm" className="w-full" asChild>
                 <a href="https://raydium.io/swap" target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="mr-1" />
                   Open Raydium
                 </a>
               </Button>
@@ -119,10 +123,16 @@ const HowToBuy = () => {
               </p>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" size="sm" className="w-full" onClick={() => {
-                navigator.clipboard.writeText("TOKEN_ADDRESS_HERE");
-                alert("$GORILLA token address copied to clipboard!");
-              }}>
+              <Button 
+                variant="neon" 
+                size="sm" 
+                className="w-full"
+                onClick={() => {
+                  navigator.clipboard.writeText("TOKEN_ADDRESS_HERE");
+                  alert("$GORILLA token address copied to clipboard!");
+                }}
+              >
+                <Copy className="mr-1" />
                 Copy Token Address
               </Button>
             </CardFooter>
