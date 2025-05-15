@@ -65,7 +65,7 @@ const HowToBuy = () => {
                 <CardTitle className="text-lg">Get some SOL</CardTitle>
                 <div className="h-8 w-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">2</div>
               </div>
-              <CardDescription className="text-custom-subtle">Solana's native currency</CardDescription>
+              <CardDescription className="text-custom-subtle">Solana&apos;s native currency</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm mb-4 text-custom-subtle">
@@ -115,7 +115,7 @@ const HowToBuy = () => {
             </CardHeader>
             <CardContent>
               <p className="text-sm mb-4 text-custom-subtle">
-                Paste the $GORILLA token address (CA) into Raydium and swap your SOL for $GORILLA. There are zero taxes so you don't need to worry about slippage.
+                Paste the $GORILLA token address (CA) into Raydium and swap your SOL for $GORILLA. There are zero taxes so you don&apos;t need to worry about slippage.
               </p>
             </CardContent>
             <CardFooter>

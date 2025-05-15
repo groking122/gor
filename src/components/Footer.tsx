@@ -1,9 +1,9 @@
 "use client";
 
 import React from 'react';
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -14,9 +14,11 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-start justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className="h-12 w-12 overflow-hidden rounded-md relative ring-2 ring-white/10 shadow-lg">
-              <img 
+              <Image 
                 src="/213123122131.png" 
                 alt="Gorilla Logo" 
+                width={48}
+                height={48}
                 className="w-full h-full object-contain rounded-md"
               />
             </div>

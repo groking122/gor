@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 const Header = () => {
   return (
@@ -10,9 +11,11 @@ const Header = () => {
       <div className="container-custom flex h-16 items-center justify-between">
         <div className="flex items-center space-x-3">
           <div className="h-12 w-12 overflow-hidden rounded-md relative shadow-lg ring-2 ring-white/10 transition-all duration-300 hover:ring-white/30">
-            <img 
+            <Image 
               src="/213123122131.png" 
               alt="Gorilla Logo" 
+              width={48}
+              height={48}
               className="w-full h-full object-contain rounded-md"
             />
           </div>
