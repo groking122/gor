@@ -129,7 +129,7 @@ const HowToBuy = () => {
             size="sm" 
             className="h-12 flex items-center justify-center"
             onClick={() => {
-              navigator.clipboard.writeText("TOKEN_ADDRESS_HERE");
+              navigator.clipboard.writeText("FVL6GafaXTfgFs9DPE66b2AVUXLBcVpQh79r8s5npump");
               alert("$GORILLA token address copied to clipboard!");
             }}
           >

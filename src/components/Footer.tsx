@@ -4,9 +4,22 @@ import React from 'react';
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Copy } from "lucide-react";
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const tokenAddress = "FVL6GafaXTfgFs9DPE66b2AVUXLBcVpQh79r8s5npump";
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(tokenAddress);
+      alert('$GORILLA token address copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      alert('Failed to copy token address.');
+    }
+  };
 
   return (
     <footer className="w-full border-t border-border/40 bg-gradient-to-r from-primary/90 to-primary backdrop-blur supports-[backdrop-filter]:bg-primary/60">
@@ -27,6 +40,24 @@ const Footer = () => {
               <p className="text-sm bg-gradient-to-r from-[#00FFFF] to-white bg-clip-text text-transparent font-semibold">
                 The ultimate showdown that divides the internet.
               </p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <div className="font-medium font-mono text-sm text-white">$GORILLA Token Address</div>
+            <div className="flex items-center gap-2">
+              <code className="text-xs bg-black/50 p-2 rounded-md text-custom-subtle truncate font-mono border border-white/10 max-w-48">
+                {tokenAddress}
+              </code>
+              <Button
+                onClick={handleCopy}
+                variant="neon"
+                size="sm"
+                className="whitespace-nowrap h-8"
+              >
+                <Copy className="mr-1 h-3 w-3" />
+                Copy
+              </Button>
             </div>
           </div>
         </div>
