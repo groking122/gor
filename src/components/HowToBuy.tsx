@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
@@ -35,7 +35,7 @@ const HowToBuy = () => {
           <Separator className="my-6 max-w-md mx-auto" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-10">
           {/* Step 1: Download Phantom */}
           <Card className="card-shadow bg-card/85 backdrop-blur-md border-accent/20">
             <CardHeader className="pb-2">
@@ -50,14 +50,6 @@ const HowToBuy = () => {
                 Download Phantom or your wallet of choice from the store. Desktop users, download the Google Chrome extension by going to phantom.app.
               </p>
             </CardContent>
-            <CardFooter>
-              <Button variant="gradient" size="sm" className="w-full" asChild>
-                <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer">
-                  <Download className="mr-1" />
-                  Download Phantom
-                </a>
-              </Button>
-            </CardFooter>
           </Card>
 
           {/* Step 2: Get SOL */}
@@ -74,14 +66,6 @@ const HowToBuy = () => {
                 You can buy SOL directly on Phantom, transfer from another wallet, or buy on another exchange and send it to your wallet.
               </p>
             </CardContent>
-            <CardFooter>
-              <Button variant="neon" size="sm" className="w-full" asChild>
-                <a href="https://phantom.app/buy" target="_blank" rel="noopener noreferrer">
-                  <Wallet className="mr-1" />
-                  Buy SOL
-                </a>
-              </Button>
-            </CardFooter>
           </Card>
 
           {/* Step 3: Go to Raydium */}
@@ -98,14 +82,6 @@ const HowToBuy = () => {
                 Now that you have some SOL, head to Raydium.io to swap your SOL for $GORILLA. Raydium is one of the top decentralized exchanges on Solana.
               </p>
             </CardContent>
-            <CardFooter>
-              <Button variant="gradient" size="sm" className="w-full" asChild>
-                <a href="https://raydium.io/swap" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-1" />
-                  Open Raydium
-                </a>
-              </Button>
-            </CardFooter>
           </Card>
 
           {/* Step 4: Buy $GORILLA */}
@@ -122,21 +98,44 @@ const HowToBuy = () => {
                 Paste the $GORILLA token address (CA) into Raydium and swap your SOL for $GORILLA. There are zero taxes so you don&apos;t need to worry about slippage.
               </p>
             </CardContent>
-            <CardFooter>
-              <Button 
-                variant="neon" 
-                size="sm" 
-                className="w-full"
-                onClick={() => {
-                  navigator.clipboard.writeText("TOKEN_ADDRESS_HERE");
-                  alert("$GORILLA token address copied to clipboard!");
-                }}
-              >
-                <Copy className="mr-1" />
-                Copy Token Address
-              </Button>
-            </CardFooter>
           </Card>
+        </div>
+
+        {/* Buttons in a single row */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-5xl mx-auto px-4">
+          <Button variant="gradient" size="sm" className="h-12 flex items-center justify-center" asChild>
+            <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer">
+              <Download className="mr-2" />
+              Download Phantom
+            </a>
+          </Button>
+
+          <Button variant="neon" size="sm" className="h-12 flex items-center justify-center" asChild>
+            <a href="https://www.binance.com/en/how-to-buy/solana" target="_blank" rel="noopener noreferrer">
+              <Wallet className="mr-2" />
+              Buy SOL
+            </a>
+          </Button>
+
+          <Button variant="gradient" size="sm" className="h-12 flex items-center justify-center" asChild>
+            <a href="https://raydium.io/swap" target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="mr-2" />
+              Open Raydium
+            </a>
+          </Button>
+
+          <Button 
+            variant="neon" 
+            size="sm" 
+            className="h-12 flex items-center justify-center"
+            onClick={() => {
+              navigator.clipboard.writeText("TOKEN_ADDRESS_HERE");
+              alert("$GORILLA token address copied to clipboard!");
+            }}
+          >
+            <Copy className="mr-2" />
+            Copy Token Address
+          </Button>
         </div>
       </div>
     </section>
