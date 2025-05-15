@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -21,6 +21,187 @@ type FormErrors = {
   [key in keyof FormData]?: string;
 }
 
+// Component to render just the form part, client-side only
+const ApplicationForm = ({ 
+  formData, 
+  errors, 
+  handleChange, 
+  handleSubmit, 
+  handleSaveDraft, 
+  isSubmitting 
+}: {
+  formData: FormData,
+  errors: FormErrors,
+  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void,
+  handleSubmit: (e: React.FormEvent) => void,
+  handleSaveDraft: () => void,
+  isSubmitting: boolean
+}) => {
+  return (
+    <form onSubmit={handleSubmit} suppressHydrationWarning>
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="text-white">Fighter Application Form</CardTitle>
+            <CardDescription className="text-custom-subtle mt-1">All fields required</CardDescription>
+          </div>
+          <div className="px-3 py-1 rounded-full bg-accent/20 text-xs text-accent font-medium">
+            REF: #GORILLA-2025
+          </div>
+        </div>
+      </CardHeader>
+      
+      <CardContent className="space-y-6">
+        {/* Email-like header */}
+        <div className="border-b border-border/40 pb-4 text-sm">
+          <div className="grid grid-cols-[100px_1fr] gap-2">
+            <span className="text-custom-subtle">From:</span>
+            <span className="text-white">applications@100menvsgorilla.com</span>
+          </div>
+          <div className="grid grid-cols-[100px_1fr] gap-2 mt-1">
+            <span className="text-custom-subtle">To:</span>
+            <span className="text-white">menvsgorilla@fight.com</span>
+          </div>
+          <div className="grid grid-cols-[100px_1fr] gap-2 mt-1">
+            <span className="text-custom-subtle">Subject:</span>
+            <span className="text-white font-medium">Fighter Credentials Required</span>
+          </div>
+        </div>
+        
+        {/* Message body */}
+        <div className="text-custom-subtle">
+          <p className="mb-4">
+            Dear Applicant,
+          </p>
+          <p className="mb-4">
+            Thank you for your interest in joining the human team for the ultimate 100 Men vs 1 Gorilla showdown. To process your application, we need you to provide your fighting credentials.
+          </p>
+        </div>
+        
+        {/* Application form fields */}
+        <div className="space-y-4 bg-background/20 p-4 rounded-md">
+          <div className="space-y-2">
+            <label htmlFor="fullName" className="block text-sm font-medium text-white">
+              Full Name
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="Enter your full name"
+              className="w-full px-3 py-2 bg-background/50 border rounded-md text-white placeholder-custom-subtle/50 focus:outline-none focus:ring-1 focus:ring-accent"
+            />
+            {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="age" className="block text-sm font-medium text-white">
+                Age <span className="text-xs text-custom-subtle">(18-60)</span>
+              </label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+                placeholder="Years"
+                className="w-full px-3 py-2 bg-background/50 border rounded-md text-white placeholder-custom-subtle/50 focus:outline-none focus:ring-1 focus:ring-accent"
+              />
+              {errors.age && <p className="text-red-500 text-xs mt-1">{errors.age}</p>}
+            </div>
+            
+            <div className="space-y-2">
+              <label htmlFor="weight" className="block text-sm font-medium text-white">
+                Weight
+              </label>
+              <input
+                type="text"
+                id="weight"
+                name="weight"
+                value={formData.weight}
+                onChange={handleChange}
+                placeholder="lbs"
+                className="w-full px-3 py-2 bg-background/50 border rounded-md text-white placeholder-custom-subtle/50 focus:outline-none focus:ring-1 focus:ring-accent"
+              />
+              {errors.weight && <p className="text-red-500 text-xs mt-1">{errors.weight}</p>}
+            </div>
+          </div>
+          
+          <div className="space-y-2">
+            <label htmlFor="experience" className="block text-sm font-medium text-white">
+              Combat Experience
+            </label>
+            <select
+              id="experience"
+              name="experience"
+              value={formData.experience}
+              onChange={handleChange}
+              className="w-full px-3 py-2 bg-background/50 border rounded-md text-white focus:outline-none focus:ring-1 focus:ring-accent"
+            >
+              <option value="" disabled>Select your experience level</option>
+              <option value="novice">Novice (0-2 years)</option>
+              <option value="intermediate">Intermediate (3-5 years)</option>
+              <option value="advanced">Advanced (6-10 years)</option>
+              <option value="expert">Expert (10+ years)</option>
+              <option value="professional">Professional Fighter</option>
+            </select>
+            {errors.experience && <p className="text-red-500 text-xs mt-1">{errors.experience}</p>}
+          </div>
+          
+          <div className="space-y-2">
+            <label htmlFor="disciplines" className="block text-sm font-medium text-white">
+              Combat Disciplines
+            </label>
+            <textarea
+              id="disciplines"
+              name="disciplines"
+              value={formData.disciplines}
+              onChange={handleChange}
+              placeholder="List any martial arts or combat sports experience"
+              className="w-full px-3 py-2 bg-background/50 border rounded-md text-white placeholder-custom-subtle/50 focus:outline-none focus:ring-1 focus:ring-accent h-24"
+            ></textarea>
+          </div>
+          
+          <div className="space-y-2">
+            <label htmlFor="strategy" className="block text-sm font-medium text-white">
+              Your Strategy Against the Gorilla
+            </label>
+            <textarea
+              id="strategy"
+              name="strategy"
+              value={formData.strategy}
+              onChange={handleChange}
+              placeholder="Explain your strategy and strengths"
+              className="w-full px-3 py-2 bg-background/50 border rounded-md text-white placeholder-custom-subtle/50 focus:outline-none focus:ring-1 focus:ring-accent h-32"
+            ></textarea>
+            {errors.strategy && <p className="text-red-500 text-xs mt-1">{errors.strategy}</p>}
+          </div>
+        </div>
+      </CardContent>
+      
+      <CardFooter className="flex flex-col sm:flex-row sm:justify-between space-y-3 sm:space-y-0">
+        <Button 
+          type="button" 
+          variant="outline" 
+          onClick={handleSaveDraft}
+        >
+          Save Draft
+        </Button>
+        <Button 
+          type="submit" 
+          className="bg-custom-dark-blue hover:bg-custom-dark-blue/90"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Submitting...' : 'Submit Application'}
+        </Button>
+      </CardFooter>
+    </form>
+  );
+};
+
 const Biography = () => {
   // Form state management
   const [formData, setFormData] = useState<FormData>({
@@ -36,6 +217,12 @@ const Biography = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [applicationNumber, setApplicationNumber] = useState('');
+  const [isClient, setIsClient] = useState(false);
+
+  // Set isClient to true when component mounts (client-side only)
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Handle form input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -212,161 +399,25 @@ const Biography = () => {
             </Card>
           ) : (
             <Card className="card-shadow bg-card/90 backdrop-blur-md border-accent/20">
-              <form onSubmit={handleSubmit}>
-                <CardHeader className="pb-2">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className="text-white">Fighter Application Form</CardTitle>
-                      <CardDescription className="text-custom-subtle mt-1">All fields required</CardDescription>
-                    </div>
-                    <div className="px-3 py-1 rounded-full bg-accent/20 text-xs text-accent font-medium">
-                      REF: #GORILLA-2025
-                    </div>
+              {isClient ? (
+                <ApplicationForm 
+                  formData={formData}
+                  errors={errors}
+                  handleChange={handleChange}
+                  handleSubmit={handleSubmit}
+                  handleSaveDraft={handleSaveDraft}
+                  isSubmitting={isSubmitting}
+                />
+              ) : (
+                <div className="p-8 text-center">
+                  <div className="animate-pulse">
+                    <div className="h-6 bg-accent/20 rounded w-1/2 mx-auto mb-4"></div>
+                    <div className="h-4 bg-accent/10 rounded w-3/4 mx-auto mb-8"></div>
+                    <div className="h-32 bg-accent/10 rounded mb-4"></div>
+                    <div className="h-32 bg-accent/10 rounded mb-4"></div>
                   </div>
-                </CardHeader>
-                
-                <CardContent className="space-y-6">
-                  {/* Email-like header */}
-                  <div className="border-b border-border/40 pb-4 text-sm">
-                    <div className="grid grid-cols-[100px_1fr] gap-2">
-                      <span className="text-custom-subtle">From:</span>
-                      <span className="text-white">applications@100menvsgorilla.com</span>
-                    </div>
-                    <div className="grid grid-cols-[100px_1fr] gap-2 mt-1">
-                      <span className="text-custom-subtle">To:</span>
-                      <span className="text-white">menvsgorilla@fight.com</span>
-                    </div>
-                    <div className="grid grid-cols-[100px_1fr] gap-2 mt-1">
-                      <span className="text-custom-subtle">Subject:</span>
-                      <span className="text-white font-medium">Fighter Credentials Required</span>
-                    </div>
-                  </div>
-                  
-                  {/* Message body */}
-                  <div className="text-custom-subtle">
-                    <p className="mb-4">
-                      Dear Applicant,
-                    </p>
-                    <p className="mb-4">
-                      Thank you for your interest in participating in the 100 Men vs 1 Gorilla battle. 
-                      To process your application, we need the following information:
-                    </p>
-                  </div>
-                  
-                  {/* Form fields */}
-                  <div className="space-y-4 bg-primary/20 p-4 rounded-md">
-                    <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white">Full Name</label>
-                      <input 
-                        type="text" 
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        placeholder="Enter your full name" 
-                        className={`w-full px-3 py-2 bg-background/50 border rounded-md text-white ${errors.fullName ? 'border-red-500' : 'border-border/50'}`} 
-                      />
-                      {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="block text-sm font-medium text-white">Age</label>
-                        <input 
-                          type="number" 
-                          name="age"
-                          value={formData.age}
-                          onChange={handleChange}
-                          placeholder="Years" 
-                          className={`w-full px-3 py-2 bg-background/50 border rounded-md text-white ${errors.age ? 'border-red-500' : 'border-border/50'}`} 
-                        />
-                        {errors.age && <p className="text-red-500 text-xs mt-1">{errors.age}</p>}
-                      </div>
-                      <div className="space-y-2">
-                        <label className="block text-sm font-medium text-white">Weight</label>
-                        <input 
-                          type="text" 
-                          name="weight"
-                          value={formData.weight}
-                          onChange={handleChange}
-                          placeholder="lbs" 
-                          className={`w-full px-3 py-2 bg-background/50 border rounded-md text-white ${errors.weight ? 'border-red-500' : 'border-border/50'}`} 
-                        />
-                        {errors.weight && <p className="text-red-500 text-xs mt-1">{errors.weight}</p>}
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white">Combat Experience</label>
-                      <select 
-                        name="experience"
-                        value={formData.experience}
-                        onChange={handleChange}
-                        className={`w-full px-3 py-2 bg-background/50 border rounded-md text-white ${errors.experience ? 'border-red-500' : 'border-border/50'}`}
-                      >
-                        <option value="">Select experience level</option>
-                        <option value="none">None</option>
-                        <option value="novice">Novice (1-2 years)</option>
-                        <option value="intermediate">Intermediate (3-5 years)</option>
-                        <option value="advanced">Advanced (5-10 years)</option>
-                        <option value="expert">Expert (10+ years)</option>
-                      </select>
-                      {errors.experience && <p className="text-red-500 text-xs mt-1">{errors.experience}</p>}
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white">Fighting Disciplines</label>
-                      <textarea 
-                        name="disciplines"
-                        value={formData.disciplines}
-                        onChange={handleChange}
-                        placeholder="List any martial arts or combat sports experience" 
-                        className={`w-full px-3 py-2 bg-background/50 border rounded-md text-white h-20 ${errors.disciplines ? 'border-red-500' : 'border-border/50'}`}
-                      ></textarea>
-                      {errors.disciplines && <p className="text-red-500 text-xs mt-1">{errors.disciplines}</p>}
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label className="block text-sm font-medium text-white">Why do you think you can defeat a gorilla?</label>
-                      <textarea 
-                        name="strategy"
-                        value={formData.strategy}
-                        onChange={handleChange}
-                        placeholder="Explain your strategy and strengths" 
-                        className={`w-full px-3 py-2 bg-background/50 border rounded-md text-white h-20 ${errors.strategy ? 'border-red-500' : 'border-border/50'}`}
-                      ></textarea>
-                      {errors.strategy && <p className="text-red-500 text-xs mt-1">{errors.strategy}</p>}
-                    </div>
-                  </div>
-                  
-                  <div className="text-custom-subtle">
-                    <p>
-                      Please submit your information as soon as possible. We will evaluate your credentials 
-                      and contact you if you meet our requirements for the human team.
-                    </p>
-                    <p className="mt-4 italic">
-                      NOTE: By applying, you acknowledge the risks involved in facing a 400+ lb silverback gorilla 
-                      and the slim chances of individual survival. Strength in numbers!
-                    </p>
-                  </div>
-                </CardContent>
-                
-                <CardFooter className="border-t border-border/40 pt-4 flex justify-end space-x-3">
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    onClick={handleSaveDraft}
-                  >
-                    Save Draft
-                  </Button>
-                  <Button 
-                    type="submit" 
-                    className="bg-custom-dark-blue hover:bg-custom-dark-blue/90"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? 'Submitting...' : 'Submit Application'}
-                  </Button>
-                </CardFooter>
-              </form>
+                </div>
+              )}
             </Card>
           )}
         </div>
