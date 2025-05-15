@@ -7,19 +7,15 @@ import { Badge } from "@/components/ui/badge";
 
 const Footer = () => {
   const year = new Date().getFullYear();
-  const contractAddress = "TBA - Coming Soon!"; // Contract placeholder
+  const contractAddress = "57d0a5165933347cd158c16832e4ec0ee9805d0d2fcc0d8f00cfc01f";
 
   const handleCopy = async () => {
-    if (contractAddress.startsWith("TBA")) {
-      alert("Contract address is not yet available. Stay tuned!");
-      return;
-    }
     try {
       await navigator.clipboard.writeText(contractAddress);
-      alert('Contract address copied to clipboard!');
+      alert('Policy ID copied to clipboard!');
     } catch (err) {
       console.error('Failed to copy: ', err);
-      alert('Failed to copy contract address.');
+      alert('Failed to copy policy ID.');
     }
   };
 
@@ -44,7 +40,7 @@ const Footer = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            <div className="font-medium font-mono text-sm">Contract <span className="text-xs opacity-70">(Coming Soon)</span></div>
+            <div className="font-medium font-mono text-sm">$GORILLA Policy ID</div>
             <div className="flex items-center gap-2">
               <code className="text-xs bg-black/50 p-2 rounded-md text-custom-subtle truncate font-mono border border-white/10 max-w-48">
                 {contractAddress}

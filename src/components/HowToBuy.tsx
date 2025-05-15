@@ -109,23 +109,6 @@ const HowToBuy = () => {
             </CardFooter>
           </Card>
         </div>
-
-        {/* Policy ID Box */}
-        <div className="mt-8 max-w-lg mx-auto">
-          <Card className="bg-primary/75 backdrop-blur-md border-accent/20">
-            <CardContent className="pt-6">
-              <div className="text-center mb-1">
-                <h4 className="text-sm font-medium">$GORILLA Policy ID:</h4>
-                <div className="bg-background/30 p-2 rounded mt-2 flex items-center justify-between">
-                  <code className="text-xs text-accent truncate">Coming Soon</code>
-                  <Button variant="ghost" size="sm" className="h-6 ml-2">
-                    Copy
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
     </section>
   );
